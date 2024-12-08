@@ -53,7 +53,7 @@ class UseCaseGenerator:
         else:
             raise ValueError("Invalid LLM provider specified.")
 
-        # Debug: Print raw response
+        # Debug
         print("RAW RESPONSE:", response)
 
         # Split the response into individual use cases
@@ -85,7 +85,7 @@ class UseCaseGenerator:
                     "Benefits": benefits
                 })
 
-        # Debug: Print parsed use cases
+        # Debug
         print("Parsed Use Cases:", use_cases)
 
         return use_cases

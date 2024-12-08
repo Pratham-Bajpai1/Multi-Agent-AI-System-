@@ -7,16 +7,14 @@ from docx.oxml import OxmlElement
 
 def format_document(document):
     """Applies professional formatting to the document."""
-    # Set styles for headings and paragraphs
+    
     styles = document.styles
 
-    # Title Style
     title_style = styles['Heading 1']
     title_style.font.name = 'Arial'
     title_style.font.size = Pt(20)
     title_style.font.bold = True
 
-    # Heading Style
     heading_style = styles['Heading 2']
     heading_style.font.name = 'Arial'
     heading_style.font.size = Pt(18)
@@ -27,7 +25,6 @@ def format_document(document):
     subheading_style.font.size = Pt(16)
     subheading_style.font.bold = True
 
-    # Normal Paragraph Style
     normal_style = styles['Normal']
     normal_style.font.name = 'Times New Roman'
     normal_style.font.size = Pt(14)
@@ -35,9 +32,9 @@ def format_document(document):
 def add_horizontal_line(document):
     """Adds a horizontal line using a paragraph of underscores."""
     paragraph = document.add_paragraph()
-    run = paragraph.add_run("_" * 60)  # 60 underscores to create a line
-    run.bold = True  # Makes the line bold for better visibility
-    paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER  # Centers the line
+    run = paragraph.add_run("_" * 60)  
+    run.bold = True  
+    paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER  
 
 def generate_reports(research_data, use_cases, datasets, company, industry):
     print("Generating reports...")
@@ -60,16 +57,16 @@ def generate_reports(research_data, use_cases, datasets, company, industry):
     if use_cases and isinstance(use_cases, list):
         try:
             document = Document()
-            format_document(document)  # Apply formatting
+            format_document(document)  
 
-            # Title
+            
             title = document.add_heading(level=1)
             run = title.add_run(f"Use Case Feasibility Report\nCompany: {company}\nIndustry: {industry}")
             run.font.bold = True
             run.font.size = Pt(20)
             title.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
-            document.add_paragraph("\n")  # Add a spacer line
+            document.add_paragraph("\n")  
 
             # Add Use Cases
             document.add_heading("Innovative Use Cases:", level=2)
@@ -102,7 +99,7 @@ def generate_reports(research_data, use_cases, datasets, company, industry):
                 for dataset in datasets:
                     document.add_paragraph(f"Platform: {dataset.get('Platform', 'Unknown')}")
                     document.add_paragraph(f"URL: {dataset.get('URL', 'No URL available')}")
-                    #document.add_paragraph("\n")  # Add a spacer line
+            
 
             # Save the report
             document.save("Use_Case_Feasibility_Report.docx")

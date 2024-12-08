@@ -8,11 +8,11 @@ import os
 
 # Initialize agents
 research_agent = ResearchAgent(api_key=SERP_API_KEY)
-use_case_agent = UseCaseGenerator(llm_provider="cohere")  # or "cohere" or "huggingface"
+use_case_agent = UseCaseGenerator(llm_provider="cohere")  #"cohere" or "huggingface"
 dataset_agent = DatasetCollector()
 
 def main():
-    # Page Configuration
+    
     st.set_page_config(page_title="Multi-Agent Use Case Generator", layout="wide")
 
     # Initialize session state
@@ -25,14 +25,12 @@ def main():
     if "use_case_results" not in st.session_state:
         st.session_state.use_case_results = []
 
-    # Title and Description
     st.title("AI-Powered Multi-Agent System")
     st.write("""
         This system generates innovative AI/ML use cases tailored for a company in a specific industry.
         Provide your inputs below, and the system will generate a detailed report.
     """)
 
-    # Input Section
     with st.form("input_form"):
         st.header("Enter Details")
         company = st.text_input("Company Name", placeholder="e.g., OpenAI")
@@ -82,10 +80,10 @@ def main():
 
                 progress_bar.progress(100)
 
-                # Display Results
+    # Display Results
     if st.session_state.generated:
         st.success("Top 5 Use Cases Generated!")
-        # Ensure use_case_results exist before displaying
+        
         if st.session_state.use_case_results:
             for idx, use_case in enumerate(st.session_state.use_case_results[:5], start=1):
                 st.subheader(f"{idx}. {use_case['Use Case']}")
@@ -105,7 +103,7 @@ def main():
             data=excel_file,
             file_name=market_research_report_path,
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-            key = "download_excel"  # Ensure unique key
+            key = "download_excel"  
             )
 
         with open(use_case_report_path, "rb") as doc_file:
